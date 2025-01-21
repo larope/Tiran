@@ -6,6 +6,7 @@ out vec3 vertexColor;
 
 uniform mat4 u_Projection;
 uniform mat4 u_View;
+uniform float u_TimeElapsed;
 
 void main() {
     gl_Position = u_Projection * u_View * vec4(aPosition, 1.0);

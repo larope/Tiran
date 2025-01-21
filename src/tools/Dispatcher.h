@@ -1,26 +1,25 @@
 #ifndef EVENTDISPATCHER_H
 #define EVENTDISPATCHER_H
-#include <unordered_map>
-#include <vector>
-#include <glm/detail/setup.hpp>
 
+#include <vector>
+#include <algorithm>
 #include "Observer.h"
 
 namespace artt {
     template<typename... Args>
     class Dispatcher {
     protected:
-        std::vector<std::vector<Observer<Args...>>> observers;
-        virtual void notifyAll(Args... args, glm::uint type) {
-            for (Observer observer : observers[type]) observer.onNotify(args..., type);
-        }
+        std::vector<Observer<Args...>*> observers;
+
+        virtual void notifyAll(Args... args);
 
     public:
-        virtual void subscribe(Observer<Args...> observer, glm::uint type) = 0;
-        virtual void unSubscribe(Observer<Args...> observer, glm::uint type) = 0;
-        virtual void emit(Args... args, glm::uint type) = 0;
+        virtual void subscribe(Observer<Args...>* observer);
+        virtual void unSubscribe(Observer<Args...>* observer);
 
-        virtual ~Dispatcher() = default;
+        virtual void emit(Args... args);
+
+        virtual ~Dispatcher();
     };
 }
 

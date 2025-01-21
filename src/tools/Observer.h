@@ -5,7 +5,7 @@ namespace artt {
     template<typename... Args>
     class Observer {
     public:
-        virtual void onNotify(Args... args, glm::uint type) = 0;
+        virtual void onNotify(Args... args) = 0;
         virtual ~Observer() = default;
     };
 }

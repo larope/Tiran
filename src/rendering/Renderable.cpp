@@ -1,6 +1,7 @@
 #include "Renderable.h"
 #include <cstddef>
 #include <glm/detail/setup.hpp>
+#include <iostream>
 
 using namespace glm;
 
@@ -94,9 +95,5 @@ void Renderable::renderAll() {
 }
 
 Renderable::~Renderable() {
-    delete[] _vertices;
-    delete[] _indices;
-    glDeleteVertexArrays(1, &_VAO);
-    glDeleteBuffers(1, &_VBO);
-    glDeleteBuffers(1, &_EBO);
+
 }

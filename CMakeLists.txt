@@ -16,15 +16,14 @@ add_subdirectory(thirdparty/glad)				#opengl loader
 add_subdirectory(thirdparty/stb_image)			#loading immaged
 add_subdirectory(thirdparty/stb_truetype)		#loading ttf files
 add_subdirectory(thirdparty/glm)				#math
-add_subdirectory(thirdparty/imgui-docking)		#ui
 
 
 # Define MY_SOURCES to be a list of all the source files for my game
 file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
 add_executable(mygame ${MY_SOURCES}
-		src/Rendering/Renderable.h
-		src/Rendering/Renderable.cpp
+		src/rendering/Renderable.h
+		src/rendering/Renderable.cpp
 		src/Input/InputManager.cpp
 		src/Input/InputManager.h
 		src/Controllers/CameraController.cpp
@@ -39,6 +38,7 @@ add_executable(mygame ${MY_SOURCES}
 		src/input/KeyboardInput.h
 		src/input/MousePositionInput.cpp
 		src/input/MousePositionInput.h
+        src/tools/Dispatcher.cpp
 )
 
 set_property(TARGET "${CMAKE_PROJECT_NAME}" PROPERTY CXX_STANDARD 17)
@@ -64,5 +64,5 @@ target_include_directories("${CMAKE_PROJECT_NAME}" PUBLIC "${CMAKE_CURRENT_SOURC
 
 
 target_link_libraries("${CMAKE_PROJECT_NAME}" PRIVATE glm glfw
-		glad stb_image stb_truetype imgui)
+		glad stb_image stb_truetype)
 
