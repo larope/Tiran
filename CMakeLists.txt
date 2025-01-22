@@ -11,6 +11,7 @@ set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
+
 add_subdirectory(thirdparty/glfw-3.3.2)			#window oppener
 add_subdirectory(thirdparty/glad)				#opengl loader
 add_subdirectory(thirdparty/stb_image)			#loading immaged
@@ -22,23 +23,25 @@ add_subdirectory(thirdparty/glm)				#math
 file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
 add_executable(mygame ${MY_SOURCES}
-		src/rendering/Renderable.h
+		include/Renderable.h
 		src/rendering/Renderable.cpp
 		src/Input/InputManager.cpp
-		src/Input/InputManager.h
+		include/InputManager.h
 		src/Controllers/CameraController.cpp
-        src/Controllers/CameraController.h
-		src/tools/Dispatcher.h
-		src/tools/Observer.h
+		include/CameraController.h
+		include/Dispatcher.h
+		include/Observer.h
 		src/entities/Entity.cpp
-		src/entities/Entity.h
+		include/Entity.h
 		src/input/MouseButtonInput.cpp
-		src/input/MouseButtonInput.h
+		include/MouseButtonInput.h
 		src/input/KeyboardInput.cpp
-		src/input/KeyboardInput.h
+		include/KeyboardInput.h
 		src/input/MousePositionInput.cpp
-		src/input/MousePositionInput.h
-        src/tools/Dispatcher.cpp
+		include/MousePositionInput.h
+		include/Singleton.h
+		include/KeyboardListener.h
+		include/MouseButtonListener.h
 )
 
 set_property(TARGET "${CMAKE_PROJECT_NAME}" PROPERTY CXX_STANDARD 17)
@@ -65,4 +68,3 @@ target_include_directories("${CMAKE_PROJECT_NAME}" PUBLIC "${CMAKE_CURRENT_SOURC
 
 target_link_libraries("${CMAKE_PROJECT_NAME}" PRIVATE glm glfw
 		glad stb_image stb_truetype)
-

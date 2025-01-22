@@ -9,12 +9,13 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
 
-#include "input/MouseButtonInput.h"
-
-#include "Rendering/Renderable.h"
+#include "InputManager.h"
+#include "../include/Renderable.h"
 
 using namespace glm;
 using namespace std;
+
+// MouseButtonInput mouseButtonInput;
 
 int main() {
 #pragma region Window Initialization
@@ -28,7 +29,7 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL Cube", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(800, 800, "OpenGL Cube", nullptr, nullptr);
 
     if (!window) {
         glfwTerminate();
@@ -43,11 +44,6 @@ int main() {
         return -1;
     }
     cout << "GLAD is successfully initialized!" << endl;
-//
-//    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-//    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-//    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
-//    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 #pragma endregion
 #pragma region Shader Initialization
     Shader defaultShader;
@@ -65,24 +61,29 @@ int main() {
 
     glEnable(GL_DEPTH_TEST);
 #pragma endregion
+#pragma region Input Initialization
+    InputManager::getInstance().setContext(window);
+#pragma endregion
     Renderable cube(CUBE, vec3(1,0,0), vec3(0,1,1));
     Renderable cube1(CUBE, vec3(-1,0,0), vec3(1,1,1));
-    Renderable cube2(CUBE, vec3(0,0,0), vec3(1,1,0));
+    Renderable cube2(CUBE, vec3(0.3,0,1), vec3(1,1,0));
     Renderable cube3(CUBE, vec3(0,1,0), vec3(1,0,0));
+    Renderable cube4(CUBE, vec3(0.2,1,0), vec3(1,1,1));
 
     Renderable::bindAll();
 
-
-//    glfwSetMouseButtonCallback(window, [](GLFWwindow* window, int button, int action, int mods) {mouseButtonInput.emit(window, button, action, mods);});
-
+    // glfwSetMouseButtonCallback(window, [](GLFWwindow* window, int button, int action, int mods) {
+    //     mouseButtonInput.emit(window, button, action, mods);
+    // });
+    float t = 0;
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+        t += 0.01;
+        glUniform1f(u_TimeElapsed, t);
         Renderable::renderAll();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-
     return 0;
 }

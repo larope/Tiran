@@ -1,11 +1,11 @@
-#include "Renderable.h"
+#include "../../include/Renderable.h"
 #include <cstddef>
 #include <glm/detail/setup.hpp>
 #include <iostream>
 
 using namespace glm;
 
-std::vector<Renderable> Renderable::_renderables;
+std::vector<Renderable*> Renderable::_renderables;
 
 Renderable::Renderable(
     float* vertices, size_t verticesSize,
@@ -17,7 +17,7 @@ Renderable::Renderable(
     this->_indices = indices;
     this->_indicesSize = indicesSize;
     this->_position = position;
-    _renderables.push_back(*this);
+    _renderables.push_back(this);
 }
 Renderable::Renderable(
     Shapes shape, vec3 position, vec3 color
@@ -47,7 +47,9 @@ Renderable::Renderable(
           };
         this->_indicesSize = 36;
     }
-    _renderables.push_back(*this);
+
+    _renderables.push_back(this);
+
 }
 void Renderable::bind() {
     glGenVertexArrays(1, &_VAO);
@@ -83,14 +85,31 @@ void Renderable::render() {
     glBindVertexArray(_VAO);
     glDrawElements(GL_TRIANGLES, _indicesSize, GL_UNSIGNED_INT, 0);
 }
+
+void Renderable::enableRendering() {
+    _renderingEnabled = true;
+}
+
+void Renderable::disableRendering() {
+    _renderingEnabled = false;
+
+}
+
+bool Renderable::isRenderingEnabled() {
+    return _renderingEnabled;
+}
+
 void Renderable::bindAll() {
-    for (Renderable& renderable: _renderables) {
-        renderable.bind();
+    for (Renderable* renderable: _renderables) {
+        renderable->bind();
     }
 }
 void Renderable::renderAll() {
-    for (Renderable& renderable: _renderables) {
-        renderable.render();
+    for (Renderable* renderable: _renderables) {
+        if (renderable->isRenderingEnabled()) {
+
+            renderable->render();
+        }
     }
 }
 
