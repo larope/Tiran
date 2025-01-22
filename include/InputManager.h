@@ -19,8 +19,10 @@ class InputManager : public artt::Singleton<InputManager>{
     void setCallbacks();
 
 public:
-    void setContext(GLFWwindow *window);
-    void addKeyboardInputListener();
+    static void setContext(GLFWwindow *window);
+    static void addKeyboardInputListener(artt::Observer<GLFWwindow*, int, int, int, int>* listener);
+    static void addMouseButtonListener(artt::Observer<GLFWwindow*, int, int, int>* listener);
+    static void addMousePositionListener(artt::Observer<GLFWwindow*, double, double>* listener);
 };
 
 #endif

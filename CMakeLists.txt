@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.16)
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>") #we want to use the static runtime
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Release>:Release>")
 
-project(mygame)
+project(Tiran)
 
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
@@ -22,10 +22,10 @@ add_subdirectory(thirdparty/glm)				#math
 # Define MY_SOURCES to be a list of all the source files for my game
 file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
-add_executable(mygame ${MY_SOURCES}
+add_executable(Tiran ${MY_SOURCES}
 		include/Renderable.h
 		src/rendering/Renderable.cpp
-		src/Input/InputManager.cpp
+		src/input/InputManager.cpp
 		include/InputManager.h
 		src/Controllers/CameraController.cpp
 		include/CameraController.h
@@ -42,6 +42,9 @@ add_executable(mygame ${MY_SOURCES}
 		include/Singleton.h
 		include/KeyboardListener.h
 		include/MouseButtonListener.h
+		src/project/Game.cpp
+		src/project/Game.h
+		include/MousePositionListener.h
 )
 
 set_property(TARGET "${CMAKE_PROJECT_NAME}" PROPERTY CXX_STANDARD 17)

@@ -1,8 +1,8 @@
 #include "InputManager.h"
 
 void InputManager::setContext(GLFWwindow *window) {
-    _window = window;
-    setCallbacks();
+    _instance._window = window;
+    _instance.setCallbacks();
 }
 
 void InputManager::setCallbacks() {
@@ -17,3 +17,14 @@ void InputManager::setCallbacks() {
     });
 }
 
+void InputManager::addKeyboardInputListener(artt::Observer<GLFWwindow*, int, int, int, int>* listener) {
+    _instance._keyboardInput.subscribe(listener);
+}
+
+void InputManager::addMouseButtonListener(artt::Observer<GLFWwindow *, int, int, int> *listener) {
+    _instance._mouseButton.subscribe(listener);
+}
+
+void InputManager::addMousePositionListener(artt::Observer<GLFWwindow*, double, double>* listener){
+    _instance._mousePosition.subscribe(listener);
+}

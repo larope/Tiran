@@ -13,3 +13,13 @@ void Entity::loopAll() {
         (*entity).gameLoop();
     }
 }
+
+void Entity::onNotify(GLFWwindow *window, int key, int scancode, int action, int mods) {
+    onKeyboardInput(window, key, scancode, action, mods);
+}
+void Entity::onNotify(GLFWwindow* window, int button, int action, int mods) {
+    onMouseButtonInput(window, button, action, mods);
+}
+void Entity::onNotify(GLFWwindow* window, double x, double y) {
+    onMousePositionChange(window, x, y);
+}
