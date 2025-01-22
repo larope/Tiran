@@ -4,7 +4,7 @@
 #include "GLFW/glfw3.h"
 #include "Observer.h"
 
-class MousePositionListener : artt::Observer<GLFWwindow*, double, double>{
+class MousePositionListener : protected artt::Observer<GLFWwindow*, double, double>{
 
 };
 

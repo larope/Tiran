@@ -9,8 +9,11 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
 
+#include "Entity.h"
 #include "InputManager.h"
 #include "../include/Renderable.h"
+#include "entities/Player.h"
+#include "game/game.h"
 
 using namespace glm;
 using namespace std;
@@ -52,7 +55,7 @@ int main() {
 
     int u_ViewLocation = defaultShader.getUniform("u_View");
     int u_ProjectionLocation = defaultShader.getUniform("u_Projection");
-    int u_TimeElapsed = defaultShader.getUniform("u_TimeElapsed");;
+
     mat4 view = translate(mat4(1.0f), vec3(0.0f, 0.0f, -3.0f));
     mat4 projection = perspective(radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 
@@ -62,8 +65,12 @@ int main() {
     glEnable(GL_DEPTH_TEST);
 #pragma endregion
 #pragma region Input Initialization
-    InputManager::getInstance().setContext(window);
+    InputManager::setContext(window);
 #pragma endregion
+    game::setup();
+
+    Entity::setupAll();
+
     Renderable cube(CUBE, vec3(1,0,0), vec3(0,1,1));
     Renderable cube1(CUBE, vec3(-1,0,0), vec3(1,1,1));
     Renderable cube2(CUBE, vec3(0.3,0,1), vec3(1,1,0));
@@ -71,15 +78,15 @@ int main() {
     Renderable cube4(CUBE, vec3(0.2,1,0), vec3(1,1,1));
 
     Renderable::bindAll();
-
     // glfwSetMouseButtonCallback(window, [](GLFWwindow* window, int button, int action, int mods) {
     //     mouseButtonInput.emit(window, button, action, mods);
     // });
-    float t = 0;
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        t += 0.01;
-        glUniform1f(u_TimeElapsed, t);
+
+        game::loop();
+        Entity::loopAll();
+
         Renderable::renderAll();
 
         glfwSwapBuffers(window);

@@ -3,7 +3,7 @@
 #include "Observer.h"
 #include "GLFW/glfw3.h"
 
-class MouseButtonListener : public artt::Observer<GLFWwindow*, int, int, int>{
+class MouseButtonListener : protected artt::Observer<GLFWwindow*, int, int, int>{
 
 };
 

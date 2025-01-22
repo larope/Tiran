@@ -3,7 +3,7 @@
 #include "Observer.h"
 #include "GLFW/glfw3.h"
 
-class KeyboardListener : artt::Observer<GLFWwindow*, int, int, int, int>{
+class KeyboardListener : protected artt::Observer<GLFWwindow*, int, int, int, int>{
 
 };
 

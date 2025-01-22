@@ -107,12 +107,31 @@ void Renderable::bindAll() {
 void Renderable::renderAll() {
     for (Renderable* renderable: _renderables) {
         if (renderable->isRenderingEnabled()) {
-
             renderable->render();
         }
     }
 }
 
 Renderable::~Renderable() {
+    if (_vertices != nullptr) {
+        delete[] _vertices;
+        _vertices = nullptr;
+    }
+    if (_indices != nullptr) {
+        delete[] _indices;
+        _indices = nullptr;
+    }
 
+    if (_VAO != 0) {
+        glDeleteVertexArrays(1, &_VAO);
+        _VAO = 0;
+    }
+    if (_VBO != 0) {
+        glDeleteBuffers(1, &_VBO);
+        _VBO = 0;
+    }
+    if (_EBO != 0) {
+        glDeleteBuffers(1, &_EBO);
+        _EBO = 0;
+    }
 }

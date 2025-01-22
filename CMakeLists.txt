@@ -42,9 +42,11 @@ add_executable(Tiran ${MY_SOURCES}
 		include/Singleton.h
 		include/KeyboardListener.h
 		include/MouseButtonListener.h
-		src/project/Game.cpp
-		src/project/Game.h
-		include/MousePositionListener.h
+        include/MousePositionListener.h
+		src/entities/Player.cpp
+		src/entities/Player.h
+		src/game/game.cpp
+		src/game/game.h
 )
 
 set_property(TARGET "${CMAKE_PROJECT_NAME}" PROPERTY CXX_STANDARD 17)
