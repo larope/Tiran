@@ -43,8 +43,8 @@ add_executable(Tiran ${MY_SOURCES}
 		include/KeyboardListener.h
 		include/MouseButtonListener.h
         include/MousePositionListener.h
-		src/entities/Player.cpp
-		src/entities/Player.h
+        src/game/Player.cpp
+        src/game/Player.h
 		src/game/game.cpp
 		src/game/game.h
 )

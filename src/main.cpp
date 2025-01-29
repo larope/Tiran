@@ -12,7 +12,7 @@
 #include "Entity.h"
 #include "InputManager.h"
 #include "../include/Renderable.h"
-#include "entities/Player.h"
+#include "game/Player.h"
 #include "game/game.h"
 
 using namespace glm;
@@ -68,19 +68,12 @@ int main() {
     InputManager::setContext(window);
 #pragma endregion
     game::setup();
-
     Entity::setupAll();
 
-    Renderable cube(CUBE, vec3(1,0,0), vec3(0,1,1));
-    Renderable cube1(CUBE, vec3(-1,0,0), vec3(1,1,1));
-    Renderable cube2(CUBE, vec3(0.3,0,1), vec3(1,1,0));
-    Renderable cube3(CUBE, vec3(0,1,0), vec3(1,0,0));
-    Renderable cube4(CUBE, vec3(0.2,1,0), vec3(1,1,1));
 
     Renderable::bindAll();
-    // glfwSetMouseButtonCallback(window, [](GLFWwindow* window, int button, int action, int mods) {
-    //     mouseButtonInput.emit(window, button, action, mods);
-    // });
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Black background
+
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -91,6 +84,7 @@ int main() {
 
         glfwSwapBuffers(window);
         glfwPollEvents();
+
     }
     return 0;
 }

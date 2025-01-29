@@ -8,8 +8,8 @@
 std::vector<Entity*> Entity::_entities;
 
 Entity::Entity() {
-
     _entities.push_back(this);
+
     InputManager::addKeyboardInputListener(this);
     InputManager::addMouseButtonListener(this);
     InputManager::addMousePositionListener(this);

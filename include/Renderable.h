@@ -37,6 +37,7 @@ public:
     Renderable(Shapes shape, vec3 position, vec3 color = vec3(1, 1, 1));
 
     void translate(vec3 direction);
+    void rotate(float angle, vec3 axis);
 
     void bind();
     void render();
