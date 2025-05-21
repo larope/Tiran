@@ -21,9 +21,7 @@ Renderable::Renderable(
     _renderables.push_back(this);
 }
 
-Renderable::Renderable(
-    Shapes shape, vec3 position, vec3 color
-) {
+Renderable::Renderable(Shapes shape, vec3 position, vec3 color) {
     this->_position = position;
 
     if (shape == CUBE) {
@@ -122,7 +120,6 @@ void Renderable::translate(vec3 direction) {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-
 void Renderable::rotate(float angle, vec3 axis) {
     // Create a rotation matrix
     mat4 rotationMatrix = glm::rotate(mat4(1.0f), radians(angle), axis);
@@ -146,6 +143,12 @@ void Renderable::rotate(float angle, vec3 axis) {
     glBufferSubData(GL_ARRAY_BUFFER, 0, _verticesSize * sizeof(float), _vertices);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
+
+void Renderable::setPosition(vec3 position) {
+    translate(-_position);
+    translate(position);
+}
+
 
 void Renderable::render() {
     if (_shader != nullptr) {

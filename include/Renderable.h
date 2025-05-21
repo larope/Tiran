@@ -24,6 +24,8 @@ class Renderable {
     float* _vertices;
     size_t _verticesSize;
 
+    float* _verticesPositioned;
+
     uint *_indices;
     size_t _indicesSize;
 
@@ -38,6 +40,8 @@ public:
 
     void translate(vec3 direction);
     void rotate(float angle, vec3 axis);
+    void setPosition(vec3 position);
+
 
     void bind();
     void render();

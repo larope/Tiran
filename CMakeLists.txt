@@ -47,6 +47,8 @@ add_executable(Tiran ${MY_SOURCES}
         src/game/Player.h
 		src/game/game.cpp
 		src/game/game.h
+        src/utils/Time.cpp
+		include/Time.h
 )
 
 set_property(TARGET "${CMAKE_PROJECT_NAME}" PROPERTY CXX_STANDARD 17)

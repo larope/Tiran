@@ -2,11 +2,12 @@
 #include <glm/vec3.hpp>
 #include "Renderable.h"
 #include "Player.h"
+#include "Time.h"
 
 using namespace glm;
 
 namespace game {
-    Renderable cube(SPHERE, vec3(1,0,0), vec3(0,1,1));
+    Renderable cube(CUBE, vec3(2,0,0), vec3(0,1,1));
     // Renderable cube1(CUBE, vec3(-1,0,0), vec3(1,1,1));
     // Renderable cube2(CUBE, vec3(0.3,0,1), vec3(1,1,0));
     // Renderable cube3(CUBE, vec3(0,1,0), vec3(1,.4,.4));
@@ -15,9 +16,9 @@ namespace game {
         Player* player;
         player = new Player();
     }
-    float t = 0;
+
     void loop() {
-        t+=0.1;
-        cube.rotate(2*M_PI/10, vec3(0, 1, 0));
+        cube.rotate(10*2*M_PI*Time::deltaTime(), vec3(0, 1, 0));
+        cube.setPosition(vec3(0,1,0)*Time::currentTimeSin());
     }
 }
