@@ -20,5 +20,6 @@ namespace game {
     void loop() {
         cube.rotate(10*2*M_PI*Time::deltaTime(), vec3(0, 1, 0));
         cube.setPosition(vec3(0,1,0)*Time::currentTimeSin());
+        Time::currentTimeSin();
     }
 }

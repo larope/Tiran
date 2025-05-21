@@ -44,12 +44,12 @@ public:
 
 
     void bind();
-    void render();
+    void render() const;
 
     void enableRendering();
     void disableRendering();
 
-    bool isRenderingEnabled();
+    [[nodiscard]] bool isRenderingEnabled() const;
 
     static void renderAll();
     static void bindAll();

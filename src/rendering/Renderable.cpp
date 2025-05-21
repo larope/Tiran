@@ -144,13 +144,13 @@ void Renderable::rotate(float angle, vec3 axis) {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void Renderable::setPosition(vec3 position) {
+void Renderable::setPosition(const vec3 position) {
     translate(-_position);
     translate(position);
 }
 
 
-void Renderable::render() {
+void Renderable::render() const {
     if (_shader != nullptr) {
         _shader->bind();
     }
@@ -167,7 +167,7 @@ void Renderable::disableRendering() {
     _renderingEnabled = false;
 }
 
-bool Renderable::isRenderingEnabled() {
+bool Renderable::isRenderingEnabled() const {
     return _renderingEnabled;
 }
 
@@ -178,7 +178,7 @@ void Renderable::bindAll() {
 }
 
 void Renderable::renderAll() {
-    for (Renderable *renderable: _renderables) {
+    for (const Renderable *renderable: _renderables) {
         if (renderable->isRenderingEnabled()) {
             renderable->render();
         }
